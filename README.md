@@ -2,62 +2,95 @@
 
 ## 📌 Project Overview
 
-This project demonstrates the design and implementation of a secure AWS network architecture using a custom Virtual Private Cloud (VPC). The architecture separates public and private resources using subnets, route tables, Internet Gateway, NAT Gateway, and Security Groups.
+This project demonstrates the design and implementation of a secure AWS Multi-Tier VPC architecture using public and private subnets. The infrastructure includes EC2 instances, NAT Gateways, Internet Gateway, Route Tables, and AWS Systems Manager Session Manager for secure connectivity.
 
 ## 🏗️ Architecture
 
-The infrastructure includes:
+The architecture includes:
 
 - Custom VPC
-- Public and Private Subnets
+- 2 Public Subnets
+- 2 Private Subnets
 - Internet Gateway for public internet access
-- NAT Gateways for secure outbound internet access from private subnets
+- 2 NAT Gateways for outbound internet access from private subnets
 - Public and Private Route Tables
-- EC2 instances deployed in public and private subnets
-- Security Groups for controlling inbound and outbound traffic
-- AWS Systems Manager (SSM) Session Manager for secure access to private instances
+- Public EC2 Instance
+- Private EC2 Instance
+- AWS Systems Manager (SSM) Session Manager
 
-## 🔧 AWS Services Used
+## 🔄 Architecture Flow
+
+```text
+Internet
+   │
+Internet Gateway
+   │
+Public Subnets
+   ├── Public EC2
+   └── NAT Gateways
+          │
+     Private Subnets
+          └── Private EC2
+```
+
+## 📸 Implementation Screenshots
+
+### 1️⃣ VPC Configuration
+
+![VPC Created](screenshots/vpc%20created.png)
+
+### 2️⃣ Subnets
+
+![Subnets](screenshots/subnets.png)
+
+### 3️⃣ Route Tables
+
+![Route Tables](screenshots/route%20tables.png)
+
+### 4️⃣ NAT Gateways
+
+![NAT Gateway](screenshots/NAT%20gateway.png)
+
+### 5️⃣ EC2 Instances
+
+![EC2 Instances](screenshots/EC2%20instances.png)
+
+### 6️⃣ Private EC2 Internet Connectivity Test
+
+The private EC2 instance successfully accessed the internet through the NAT Gateway.
+
+![Private EC2 Test](screenshots/private-EC2%20instance%20test.png)
+
+### 7️⃣ Public EC2 Web Server Test
+
+The public EC2 instance successfully hosted a web page accessible through its public IP address.
+
+![Public EC2 Test](screenshots/public-EC2%20instance%20test.png)
+
+## 🧪 Testing Performed
+
+- Verified the public EC2 instance connectivity
+- Hosted and accessed a web server from the public EC2 instance
+- Connected to the private EC2 securely using AWS Systems Manager Session Manager
+- Verified outbound internet connectivity from the private EC2 instance through the NAT Gateway
+
+## 💡 Key Learnings
+
+- Designing custom VPC architectures
+- Configuring public and private subnets
+- Managing route tables and routing
+- Using Internet and NAT Gateways
+- Deploying EC2 instances in different network tiers
+- Secure instance access using AWS Systems Manager
+
+## 🛠️ Technologies Used
 
 - Amazon VPC
 - Amazon EC2
-- AWS Identity and Access Management (IAM)
+- AWS NAT Gateway
+- AWS Internet Gateway
 - AWS Systems Manager (SSM)
-- NAT Gateway
-- Internet Gateway
-
-## 🚀 Implementation
-
-1. Created a custom VPC and configured public and private subnets.
-2. Configured an Internet Gateway to provide internet connectivity to the public subnet.
-3. Created NAT Gateways to enable outbound internet access for instances in private subnets.
-4. Configured public and private route tables and associated them with the appropriate subnets.
-5. Launched EC2 instances in public and private subnets.
-6. Configured Security Groups to control HTTP, HTTPS, and SSH traffic.
-7. Connected securely to the private EC2 instance using AWS Systems Manager Session Manager.
-8. Tested internet connectivity from the private instance through the NAT Gateway.
-
-## 🔐 Security Design
-
-- Public EC2 instances allow controlled inbound web traffic.
-- Private EC2 instances are not directly exposed to the internet.
-- Security Groups restrict access based on required ports.
-- SSM Session Manager provides secure instance access without exposing SSH directly to the internet.
-
-## 📚 Key Learnings
-
-- Designing public and private network architectures in AWS
-- Understanding route tables and subnet associations
-- Configuring Internet Gateway and NAT Gateway
-- Implementing secure access to EC2 instances
-- Using AWS Systems Manager Session Manager
-
-## 📸 Project Screenshots
-
-Screenshots demonstrating the VPC architecture, route tables, NAT Gateway configuration, and EC2 connectivity will be added here.
 
 ---
 
-### 👨‍💻 Author
-
-**Akash**
+⭐ This project was built as a hands-on AWS networking and cloud infrastructure implementation.
